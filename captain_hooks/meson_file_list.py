@@ -17,9 +17,9 @@
 import argparse
 import itertools
 import json
-import os
+import os.path
 import re
-import subprocess
+import subprocess  # nosec blacklist  # See subprocess_without_shell_equals_true note in code
 import sys
 import tempfile
 
@@ -151,6 +151,34 @@ def filter_on_source(filenames, allow_tests, includes=(), excludes=()):
     return [f for f in possibly_source if not _exclude_source(f, excludes, allow_tests)]
 
 
+def find_meson():
+    """
+    Find the install of meson.
+
+    In order of preference, we look in
+    * The venv's bin directory (Note: only works with the stdlib's venv)
+    * system paths:
+        * /bin
+        * /usr/bin
+        * /usr/local/bin
+    """
+
+    venv_path = os.environ.get('VIRTUAL_ENV')
+    if venv_path:
+        venv_paths = os.path.join(venv_path, 'bin')
+
+    system_paths = ('/bin', '/usr/bin', '/usr/local/bin')
+
+    for directory in itertools.chain(venv_paths, system_paths):
+        meson_cmd = os.path.join(directory, 'meson')
+        if os.access(meson_cmd, os.R_OK | os.X_OK, effective_ids=True):
+            break
+    else:
+        raise Exception('The meson command was not found')
+
+    return meson_cmd
+
+
 def main() -> int:
     """Run meson-file-list."""
     args = parse_args(sys.argv[1:])
@@ -158,10 +186,16 @@ def main() -> int:
     # Only process source code files
     src_files = filter_on_source(args.filenames, args.allow_tests, args.includes, args.excludes)
 
+    meson_cmd = find_meson()
     with tempfile.TemporaryDirectory() as tmpdir:
         # Create a meson builddir which has the information we need
         try:
-            subprocess.check_call(['meson', tmpdir], shell=False)
+            # We are invoking meson here to generate the meson build information. The meson command
+            # has been retrieved from the list of allowed paths and the tmpdir is set from
+            # tempfile.TemporaryDirectory().  The implicit source directory is the user's source
+            # directory so if it contains malicious files, that's the user's responsibility.
+            subprocess.check_call([meson_cmd, tmpdir],
+                                  shell=False)  # nosec subprocess_without_shell_equals_true
         except subprocess.CalledProcessError as e:
             print(f'ERROR calling meson: {e}')
             return 2
