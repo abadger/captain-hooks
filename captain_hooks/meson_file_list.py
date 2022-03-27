@@ -35,7 +35,7 @@ PATTERNS = {
     'python': (r'\.py', ),
     'rust': (r'\.rs', ),
     'vala': (r'\.vala', r'\.h'),
-    }
+}
 
 TESTS_PATTERNS = ('/tests/', '/test/')
 TEST_RE = re.compile('^.*({}).*'.format('|'.join(TESTS_PATTERNS)))
@@ -89,8 +89,7 @@ class Validator:
 def parse_args(arguments):
     """Parse the command line arguments."""
     parser = argparse.ArgumentParser(
-        'Check that all source files are listed in the meson.build file.'
-        )
+        'Check that all source files are listed in the meson.build file.')
     parser.add_argument(
         '--includes',
         '-i',
@@ -99,8 +98,7 @@ def parse_args(arguments):
         default=[],
         help='regular expression to match source code filenames.  May be given'
         ' more than once.  The patterns are in addition to the builtin'
-        ' pattern.'
-        )
+        ' pattern.')
     parser.add_argument(
         '--excludes',
         '-e',
@@ -109,8 +107,7 @@ def parse_args(arguments):
         default=[],
         help='regular expression patterns to exclude files as source code.'
         ' Use this if you wish to remove some of the patterns found by the'
-        ' builtin pattern'
-        )
+        ' builtin pattern')
     parser.add_argument(
         '--allow-tests',
         action=compat.BooleanOptionalAction,
@@ -119,8 +116,7 @@ def parse_args(arguments):
         ' meson.build files as well.  When unset, anything in a subdirectory'
         ' named `tests` or `test` is skipped.  Note that the filenames still'
         ' have to match something in --include.  The default is not to check'
-        ' test files.'
-        )
+        ' test files.')
     parser.add_argument('filenames', nargs='*', help='list of files to check', default=[])
     args = parser.parse_args(arguments)
 
