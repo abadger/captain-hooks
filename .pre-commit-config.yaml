@@ -144,7 +144,7 @@ repos:
       - id: reorder-python-imports
         args: [--py37-plus]
   - repo: https://github.com/abadger/captain-hooks
-    rev: 7bbec353f8b51866844b7e3d83d92cb3dd07b59a
+    rev: 65138279b2efac6d0b542b5d820ba3d9e902f4d4
     hooks:
       - id: meson-file-list
   - repo: local
