@@ -24,21 +24,22 @@ import sys
 import tempfile
 from collections import defaultdict
 
-PATTERNS = {'c': ('\.c', '\.h'),
-            'cpp': ('\.cc', '.cpp', 'h', '.hpp'),
-            'cython': ('\.pyx',),
-            'd': ('\.d',),
-            'fortran': ('\.f', '\.for', '.f90', '.f95', '.f03'),
-            'java': ('\.java',),
-            'python': ('\.py',),
-            'rust': ('\.rs',),
-            'vala': ('\.vala', '\.h'),
-            }
+PATTERNS = {
+    'c': (r'\.c', r'\.h'),
+    'cpp': (r'\.cc', '.cpp', 'h', '.hpp'),
+    'cython': (r'\.pyx', ),
+    'd': (r'\.d', ),
+    'fortran': (r'\.f', r'\.for', '.f90', '.f95', '.f03'),
+    'java': (r'\.java', ),
+    'python': (r'\.py', ),
+    'rust': (r'\.rs', ),
+    'vala': (r'\.vala', r'\.h'),
+    }
 
-SRC_RES = dict((k, re.compile('^.*({})$'.format('|'.join(v)))) for k, v in PATTERNS.items())
+SRC_RES = {k: re.compile('^.*({})$'.format('|'.join(v))) for k, v in PATTERNS.items()}
 
 PATTERN_FRAGMENT = '|'.join(itertools.chain(*(v for v in PATTERNS.values())))
-DEFAULT_INCLUDE_RE = re.compile('^.*({})$'.format(PATTERN_FRAGMENT))
+DEFAULT_INCLUDE_RE = re.compile(f'^.*({PATTERN_FRAGMENT})$')
 
 
 class Validator:
@@ -47,13 +48,13 @@ class Validator:
         try:
             with open(os.path.join(builddir, 'meson-info', 'intro-install_plan.json')) as f:
                 self.install_plan = json.load(f)
-        except IOError as e:
+        except OSError as e:
             raise Exception(f'ERROR: meson did not generate an intro-install_plan.json file')
 
         try:
             with open(os.path.join(builddir, 'meson-info', 'meson-info.json')) as f:
                 self.meson_info = json.load(f)
-        except IOError as e:
+        except OSError as e:
             raise Exception(f'ERROR: meson did not generate an meson-info.json file')
 
         self.HANDLERS = {'python': self.handle_python}
@@ -67,24 +68,40 @@ class Validator:
         sourcedir = self.meson_info['directories']['source']
         if not sourcedir.endswith('/'):
             sourcedir += '/'
-        if filename in [d[len(sourcedir):] for d in self.install_plan["python"].keys()]:
+        if filename in [d[len(sourcedir):] for d in self.install_plan['python'].keys()]:
             return True
         return False
+
+
 #
 # CLI functions
 #
 def parse_args(arguments):
     """Parse the command line arguments."""
-    parser = argparse.ArgumentParser('Check that all source files are listed'
-                                     ' in the meson.build file.')
-    parser.add_argument('--includes', '-i', type=str, action='append', default=[],
-                        help='regular expression to match'
-                        ' source code filenames.  May be given more than once.'
-                        ' The patterns are in addition to the builtin pattern.')
-    parser.add_argument('--excludes', '-e', type=str, action='append', default=[],
-                        help='regular expression patterns to'
-                        ' exclude files as source code.  Use this if you wish to'
-                        ' remove some of the patterns found by the builtin pattern')
+    parser = argparse.ArgumentParser(
+        'Check that all source files are listed'
+        ' in the meson.build file.'
+        )
+    parser.add_argument(
+        '--includes',
+        '-i',
+        type=str,
+        action='append',
+        default=[],
+        help='regular expression to match'
+        ' source code filenames.  May be given more than once.'
+        ' The patterns are in addition to the builtin pattern.'
+        )
+    parser.add_argument(
+        '--excludes',
+        '-e',
+        type=str,
+        action='append',
+        default=[],
+        help='regular expression patterns to'
+        ' exclude files as source code.  Use this if you wish to'
+        ' remove some of the patterns found by the builtin pattern'
+        )
     parser.add_argument('filenames', nargs='*', help='list of files to check', default=[])
     args = parser.parse_args(arguments)
 
