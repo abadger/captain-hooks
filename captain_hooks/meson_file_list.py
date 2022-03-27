@@ -165,7 +165,7 @@ def find_meson():
 
     venv_path = os.environ.get('VIRTUAL_ENV')
     if venv_path:
-        venv_paths = os.path.join(venv_path, 'bin')
+        venv_paths = (os.path.join(venv_path, 'bin'),)
 
     system_paths = ('/bin', '/usr/bin', '/usr/local/bin')
 
