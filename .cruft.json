@@ -9,7 +9,7 @@
       "email": "a.badger@gmail.com",
       "full_name": "Toshio Kuratomi",
       "github_username": "abadger",
-      "has_entrypoint": "No, skip entrypoint",
+      "has_entrypoint": "Yes, create entrypoint",
       "open_source_license": "AGPL-3.0-or-later",
       "project_name": "Captain Hooks",
       "project_slug": "captain_hooks",
