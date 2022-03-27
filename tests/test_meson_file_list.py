@@ -3,9 +3,7 @@ import os
 import pytest
 import sh
 
-
 from captain_hooks.meson_file_list import main
-
 
 MESON_BUILD_TMPL = '''
 project('pure_python_project',
