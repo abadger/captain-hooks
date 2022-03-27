@@ -1,20 +1,20 @@
 {
   "checkout": null,
-  "commit": "1f303e7d14356ab22df91688b7d29251bdff1464",
+  "commit": "360312cb2a082b1fe37c5d1b678b2b8fd81c9d58",
   "context": {
     "cookiecutter": {
-      "_template": "git@github.com:abadger/cookiecutter-python-projects",
       "codecov_badge_token": "GD9HJBEQSM",
       "description": "Collection of pre-commit hooks",
       "email": "a.badger@gmail.com",
       "full_name": "Toshio Kuratomi",
       "github_username": "abadger",
-      "has_entrypoint": "Yes, create entrypoint",
-      "open_source_license": "AGPL-3.0-or-later",
       "project_name": "Captain Hooks",
       "project_slug": "captain_hooks",
       "version": "0.0.1",
-      "year": "2022"
+      "year": "2022",
+      "open_source_license": "AGPL-3.0-or-later",
+      "has_entrypoint": "Yes, create entrypoint",
+      "_template": "git@github.com:abadger/cookiecutter-python-projects"
     }
   },
   "directory": null,
