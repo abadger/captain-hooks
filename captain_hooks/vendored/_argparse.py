@@ -6,22 +6,24 @@
 # The intention is that this is used from captain_hooks.compat.BooleanOptionalAction rather than
 # from this file. That way we use the version in the python stdlib if it is available and use this
 # code if it is not.
-
 # pylint:disable=redefined-builtin
-
-from argparse import Action, SUPPRESS
+from argparse import Action
+from argparse import SUPPRESS
 
 
 class BooleanOptionalAction(Action):
-    def __init__(self,
-                 option_strings,
-                 dest,
-                 default=None,
-                 type=None,
-                 choices=None,
-                 required=False,
-                 help=None,
-                 metavar=None):
+
+    def __init__(
+            self,
+            option_strings,
+            dest,
+            default=None,
+            type=None,
+            choices=None,
+            required=False,
+            help=None,
+            metavar=None
+        ):
 
         _option_strings = []
         for option_string in option_strings:
@@ -32,7 +34,7 @@ class BooleanOptionalAction(Action):
                 _option_strings.append(option_string)
 
         if help is not None and default is not None and default is not SUPPRESS:
-            help += " (default: %(default)s)"
+            help += ' (default: %(default)s)'
 
         super().__init__(
             option_strings=_option_strings,
@@ -43,7 +45,8 @@ class BooleanOptionalAction(Action):
             choices=choices,
             required=required,
             help=help,
-            metavar=metavar)
+            metavar=metavar
+            )
 
     def __call__(self, parser, namespace, values, option_string=None):
         if option_string in self.option_strings:
