@@ -8,7 +8,7 @@ description = "Collection of pre-commit hooks"
 home-page = "https://github.com/abadger/captain_hooks"
 requires-python = "~=3.0"
 readme = "README.md"
-dependencies = []
+dependencies = ["meson!=0.62.0"]
 
 [project.urls]
 repository = "https://github.com/abadger/captain_hooks"
