@@ -1,0 +1,58 @@
+[project]
+name = "captain_hooks"
+authors = [
+        {name="Toshio Kuratomi", email="a.badger@gmail.com"}
+]
+
+description = "Collection of pre-commit hooks"
+home-page = "https://github.com/abadger/captain_hooks"
+requires-python = "~=3.0"
+readme = "README.md"
+dependencies = []
+
+[project.urls]
+repository = "https://github.com/abadger/captain_hooks"
+documentation = "https://readthedocs.io/captain_hooks"
+
+[build-system]
+requires = ["mesonpep517"]
+build-backend = "mesonpep517.buildapi"
+
+[tool.mesonpep517.metadata]
+classifiers = [
+    "Intended Audience :: Developers",
+    "AGPL-3.0-or-later",
+    "Programming Language :: Python :: 3",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+meson-options = []
+meson-python-option-name = ""
+platforms = "any"
+# The following will go away when mesonpep517 impelements full PEP metadata
+summary = "Collection of pre-commit hooks"
+
+[tool.mesonpep517.entry-points]
+console_scripts = [
+    "meson-file-list = captain_hooks.meson_file_list:main",
+]
+
+[tool.yapf]
+based_on_style = "pep8"
+COALESCE_BRACKETS = true
+COLUMN_LIMIT = 100
+INDENT_CLOSING_BRACKETS = true
+JOIN_MULTIPLE_LINES = false
+SPLIT_BEFORE_ARITHMETIC_OPERATOR = true
+SPLIT_BEFORE_DOT = true
+SPLIT_BEFORE_EXPRESSION_AFTER_OPENING_PAREN = true
+
+[tool.coverage.run]
+branch = true
+
+[tool.coverage.report]
+fail_under = 80
+skip_covered = true
+show_missing = true
+
+[tool.vulture]
+paths = ['captain_hooks']
