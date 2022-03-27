@@ -1,4 +1,3 @@
-#!/usr/bin/python -tt
 # Copyright: (c) 2022, Toshio Kuratomi <a.badger@gmail.com>
 # License: GPL-v3-or-later
 """
@@ -11,4 +10,6 @@ make use of newer features.
 try:
     from argparse import BooleanOptionalAction
 except ImportError:
-    from vendored._argparse import BooleanOptionalAction
+    from vendored._argparse import BooleanOptionalAction  # type: ignore[no-redef]
+
+__all__ = ('BooleanOptionalAction', )

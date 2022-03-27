@@ -106,6 +106,8 @@ repos:
       - id: vulture
         args:
           - "captain_hooks"
+          - "--exclude"
+          - "_argparse.py"
   - repo: https://github.com/PyCQA/pydocstyle
     rev: 6.1.1
     hooks:

@@ -6,9 +6,12 @@
 # The intention is that this is used from captain_hooks.compat.BooleanOptionalAction rather than
 # from this file. That way we use the version in the python stdlib if it is available and use this
 # code if it is not.
-# pylint:disable=redefined-builtin
+"""Backport of BooleanOptionalArgs from Python-3.10."""
 from argparse import Action
 from argparse import SUPPRESS
+
+# Vendored code so ignore all of these
+# pylint:disable=missing-class-docstring,redefined-builtin,too-many-arguments
 
 
 class BooleanOptionalAction(Action):

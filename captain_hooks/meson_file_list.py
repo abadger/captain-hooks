@@ -22,7 +22,6 @@ import re
 import subprocess
 import sys
 import tempfile
-from collections import defaultdict
 
 from . import compat
 
@@ -48,28 +47,34 @@ DEFAULT_INCLUDE_RE = re.compile(f'^.*({PATTERN_FRAGMENT})$')
 
 
 class Validator:
+    """Class to validate that given filenames are listed in meson.build files."""
 
     def __init__(self, builddir):
         try:
             with open(os.path.join(builddir, 'meson-info', 'intro-install_plan.json')) as f:
                 self.install_plan = json.load(f)
         except OSError as e:
-            raise Exception(f'ERROR: meson did not generate an intro-install_plan.json file')
+            raise Exception(f'ERROR: meson did not generate intro-install_plan.json: {e}') from e
 
         try:
             with open(os.path.join(builddir, 'meson-info', 'meson-info.json')) as f:
                 self.meson_info = json.load(f)
         except OSError as e:
-            raise Exception(f'ERROR: meson did not generate an meson-info.json file')
+            raise Exception(f'ERROR: meson did not generate meson-info.json: {e}') from e
 
-        self.HANDLERS = {'python': self.handle_python}
+        self.handlers = {'python': self.handle_python}
 
     def validate(self, filename):
+        """Validate that a given file is in an appropriate meson.build file."""
         for language, pattern in SRC_RES.items():
             if pattern.match(filename):
-                return self.HANDLERS[language](filename)
+                return self.handlers[language](filename)
+
+        # If the file is unrecognized, return True
+        return True
 
     def handle_python(self, filename):
+        """Validate python source code."""
         sourcedir = self.meson_info['directories']['source']
         if not sourcedir.endswith('/'):
             sourcedir += '/'
@@ -125,10 +130,11 @@ def parse_args(arguments):
 def _include_source(filename, includes):
     if DEFAULT_INCLUDE_RE.match(filename):
         return True
-    else:
-        for include in includes:
-            if re.match(include, filename):
-                return True
+
+    for include in includes:
+        if re.match(include, filename):
+            return True
+
     return False
 
 
@@ -157,10 +163,10 @@ def main() -> int:
     src_files = filter_on_source(args.filenames, args.allow_tests, args.includes, args.excludes)
 
     with tempfile.TemporaryDirectory() as tmpdir:
-        # Create a meon builddir which has the information we need
+        # Create a meson builddir which has the information we need
         try:
-            subprocess.check_call(['meson', tmpdir], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        except Exception as e:
+            subprocess.check_call(['meson', tmpdir], shell=False)
+        except subprocess.CalledProcessError as e:
             print(f'ERROR calling meson: {e}')
             return 2
 
