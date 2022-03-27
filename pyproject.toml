@@ -57,3 +57,6 @@ show_missing = true
 
 [tool.vulture]
 paths = ['captain_hooks']
+
+[tool.mypy]
+show_error_codes = true

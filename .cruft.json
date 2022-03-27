@@ -1,6 +1,6 @@
 {
   "template": "git@github.com:abadger/cookiecutter-python-projects",
-  "commit": "4ffd96f5764b5ff8d5bae4b6a0c072ef6f028e57",
+  "commit": "310c638dc6275a8bb69e2e9ba2acb0459db31a4f",
   "checkout": null,
   "context": {
     "cookiecutter": {
