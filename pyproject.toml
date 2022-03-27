@@ -16,7 +16,7 @@ documentation = "https://readthedocs.io/captain_hooks"
 
 [build-system]
 # meson dep explicitly added due to https://github.com/mesonbuild/meson/issues/10181
-requires = ["meson!=0.62.0", "mesonpep517"]
+requires = ["meson!=0.62.0", "git+https://gitlab.com/thiblahute/mesonpep517@aabe01e993b87769860741b25d124f9c3fa0c8f2"]
 build-backend = "mesonpep517.buildapi"
 
 [tool.mesonpep517.metadata]
