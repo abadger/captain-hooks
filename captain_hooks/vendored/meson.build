@@ -1,5 +1,5 @@
 python.install_sources(
-  '__init__.py', '_argparse.py'
+  '__init__.py', '_argparse.py',
   pure: true,
   subdir: 'vendored',
 )
