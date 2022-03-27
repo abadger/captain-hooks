@@ -25,4 +25,5 @@ your `.pre-commit-config.yaml` file:
 ```
 
 ## Provided hooks
+
 - meson-file-list: Ensure that meson.build files contain all of the source code files.
