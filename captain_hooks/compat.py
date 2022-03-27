@@ -10,6 +10,6 @@ make use of newer features.
 try:
     from argparse import BooleanOptionalAction
 except ImportError:
-    from vendored._argparse import BooleanOptionalAction  # type: ignore[no-redef]
+    from .vendored._argparse import BooleanOptionalAction  # type: ignore[no-redef]
 
 __all__ = ('BooleanOptionalAction', )
