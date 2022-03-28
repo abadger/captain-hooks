@@ -1,6 +1,6 @@
 #!/usr/bin/python -tt
 # Copyright: (c) 2022, Toshio Kuratomi <a.badger@gmail.com>
-# License: GPL-v3-or-later
+# License: AGPL-3.0-or-later
 """
 `Pre-commit hook <https://pre-commit.com/#plugins>`_ which tries to keep your
 `meson.build <https://mesonbuild.com/>`_ files up to date.
