@@ -18,7 +18,7 @@ your `.pre-commit-config.yaml` file:
 
 ``` yaml
 - repo: https://github.com/abadger/captain-hooks
-  rev: 0.1.0  # Update using: pre-commit autoupdate --repo https://github.com/abadger/captain-hooks
+  rev: 0.2.0  # Update using: pre-commit autoupdate --repo https://github.com/abadger/captain-hooks
   hooks:
   - id: meson-file-list
   # [...]
