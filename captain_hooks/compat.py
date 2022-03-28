@@ -8,7 +8,7 @@ make use of newer features.
 """
 
 try:
-    from argparse import BooleanOptionalAction
+    from argparse import BooleanOptionalAction  # type: ignore[attr-defined]
 except ImportError:
     from .vendored._argparse import BooleanOptionalAction  # type: ignore[no-redef,misc]
 
