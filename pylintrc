@@ -1,0 +1,11 @@
+[MASTER]
+ignore=.git
+jobs=0
+
+[BASIC]
+good-names=f,
+           e
+
+[LOGGING]
+logging-format-style=new
+logging-modules=twiggy
