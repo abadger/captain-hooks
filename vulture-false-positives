@@ -1,0 +1,2 @@
+from captain_hooks import TESTS_PATTERNS  # unused variable (/home/badger/programming/captain-hooks/captain_hooks/meson_file_list.py:40)
+TESTS_PATTERNS

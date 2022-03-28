@@ -55,7 +55,8 @@ skip_covered = true
 show_missing = true
 
 [tool.vulture]
-paths = ['captain_hooks', 'vulture-false-positives.py']
+paths = ['captain_hooks', "vulture-false-positives"]
+exclude = ["_argparse.py"]
 
 [tool.mypy]
 show_error_codes = true
