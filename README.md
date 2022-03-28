@@ -17,8 +17,8 @@ You can use hooks from this repository to your code by adding the following to
 your `.pre-commit-config.yaml` file:
 
 ``` yaml
-- repo: https://github.com/abadger/captain_hooks
-  rev: main  # Or use the ref you want to point at
+- repo: https://github.com/abadger/captain-hooks
+  rev: 0.1.0  # Update using: pre-commit autoupdate --repo https://github.com/abadger/captain-hooks
   hooks:
   - id: meson-file-list
   # [...]
