@@ -38,9 +38,9 @@ PATTERNS = {
 }
 
 TESTS_PATTERNS = ('/tests/', '/test/')
-TEST_RE = re.compile('^.*({}).*'.format('|'.join(TESTS_PATTERNS)))
+TEST_RE = re.compile('^.*({"|".join(TESTS_PATTERNS)}).*')
 
-SRC_RES = {k: re.compile('^.*({})$'.format('|'.join(v))) for k, v in PATTERNS.items()}
+SRC_RES = {k: re.compile(f'^.*({("|".join(v))})$') for k, v in PATTERNS.items()}
 
 PATTERN_FRAGMENT = '|'.join(itertools.chain(*(v for v in PATTERNS.values())))
 DEFAULT_INCLUDE_RE = re.compile(f'^.*({PATTERN_FRAGMENT})$')
@@ -51,13 +51,16 @@ class Validator:
 
     def __init__(self, builddir):
         try:
-            with open(os.path.join(builddir, 'meson-info', 'intro-install_plan.json')) as f:
+            with open(
+                    os.path.join(builddir, 'meson-info', 'intro-install_plan.json'),
+                    encoding='utf-8') as f:
                 self.install_plan = json.load(f)
         except OSError as e:
             raise Exception(f'ERROR: meson did not generate intro-install_plan.json: {e}') from e
 
         try:
-            with open(os.path.join(builddir, 'meson-info', 'meson-info.json')) as f:
+            with open(
+                    os.path.join(builddir, 'meson-info', 'meson-info.json'), encoding='utf-8') as f:
                 self.meson_info = json.load(f)
         except OSError as e:
             raise Exception(f'ERROR: meson did not generate meson-info.json: {e}') from e
@@ -165,7 +168,7 @@ def find_meson():
 
     venv_path = os.environ.get('VIRTUAL_ENV')
     if venv_path:
-        venv_paths = (os.path.join(venv_path, 'bin'),)
+        venv_paths = (os.path.join(venv_path, 'bin'), )
 
     system_paths = ('/bin', '/usr/bin', '/usr/local/bin')
 
