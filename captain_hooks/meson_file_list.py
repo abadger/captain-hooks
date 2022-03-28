@@ -37,8 +37,8 @@ PATTERNS = {
     'vala': (r'\.vala', r'\.h'),
 }
 
-TESTS_PATTERNS = ('/tests/', '/test/')
-TEST_RE = re.compile('^.*({"|".join(TESTS_PATTERNS)}).*')
+TESTS_PATTERNS = (r'(\b|/)tests/', r'(\b|/)test/')
+TESTS_RE = re.compile(f'^.*({"|".join(TESTS_PATTERNS)}).*')
 
 SRC_RES = {k: re.compile(f'^.*({("|".join(v))})$') for k, v in PATTERNS.items()}
 
@@ -139,7 +139,7 @@ def _include_source(filename, includes):
 
 def _exclude_source(filename, excludes, allow_tests=False):
     if not allow_tests:
-        if TEST_RE.match(filename):
+        if TESTS_RE.match(filename):
             return True
 
     for exclude in excludes:
