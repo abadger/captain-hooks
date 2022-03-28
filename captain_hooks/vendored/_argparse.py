@@ -11,7 +11,8 @@ from argparse import Action
 from argparse import SUPPRESS
 
 # Vendored code so ignore all of these
-# pylint:disable=missing-class-docstring,redefined-builtin,too-many-arguments
+# pylint:disable=missing-class-docstring,missing-function-docstring,redefined-builtin
+# pylint:disable=too-many-arguments
 
 
 class BooleanOptionalAction(Action):
