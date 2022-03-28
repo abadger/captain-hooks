@@ -197,8 +197,11 @@ def main() -> int:
             # has been retrieved from the list of allowed paths and the tmpdir is set from
             # tempfile.TemporaryDirectory().  The implicit source directory is the user's source
             # directory so if it contains malicious files, that's the user's responsibility.
-            subprocess.check_call([meson_cmd, tmpdir],
-                                  shell=False)  # nosec subprocess_without_shell_equals_true
+            subprocess.check_call(  # nosec subprocess_without_shell_equals_true
+                [meson_cmd, tmpdir],
+                shell=False,
+                stderr=subprocess.PIPE,
+                stdout=subprocess.PIPE)
         except subprocess.CalledProcessError as e:
             print(f'ERROR calling meson: {e}')
             return 2
