@@ -9,7 +9,7 @@ home-page = "https://github.com/abadger/captain_hooks"
 requires-python = "~=3.0"
 readme = "README.md"
 # ninja extra specified because meson needs some backend to work.
-dependencies = ["meson[ninja]!=0.62.0"]
+dependencies = ["meson[ninja]!=0.62.0*"]
 
 [project.urls]
 repository = "https://github.com/abadger/captain_hooks"
@@ -20,7 +20,7 @@ documentation = "https://readthedocs.io/captain_hooks"
 # mesonpep517 from a checkout because 0.2.0 does not understand dependencies
 # Use my own fork of mesonpep517 because mesonpep517 uses meson to build so it
 # needs to have ninja added to its deps.
-requires = ["mesonpep517 @ git+https://gitlab.com/a.badger/mesonpep517@deps-fix", "meson[ninja]!==0.62.0"]
+requires = ["mesonpep517 @ git+https://gitlab.com/a.badger/mesonpep517@deps-fix", "meson[ninja]!==0.62.0*"]
 build-backend = "mesonpep517.buildapi"
 
 [tool.mesonpep517.metadata]
