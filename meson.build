@@ -1,4 +1,4 @@
-project('captain_hooks',
+project('captain-hooks',
     version: '0.2.0',
     license: 'AGPL-3.0-or-later',
   )

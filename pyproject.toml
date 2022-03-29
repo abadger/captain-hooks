@@ -1,19 +1,19 @@
 [project]
-name = "captain_hooks"
+name = "captain-hooks"
 authors = [
         {name="Toshio Kuratomi", email="a.badger@gmail.com"}
 ]
 
 description = "Collection of pre-commit hooks"
-home-page = "https://github.com/abadger/captain_hooks"
+home-page = "https://github.com/abadger/captain-hooks"
 requires-python = "~=3.0"
 readme = "README.md"
 # ninja extra specified because meson needs some backend to work.
 dependencies = ["meson[ninja]!=0.62.0.*"]
 
 [project.urls]
-repository = "https://github.com/abadger/captain_hooks"
-documentation = "https://readthedocs.io/captain_hooks"
+repository = "https://github.com/abadger/captain-hooks"
+documentation = "https://readthedocs.io/captain-hooks"
 
 [build-system]
 # meson dep explicitly added due to https://github.com/mesonbuild/meson/issues/10181
