@@ -1,4 +1,4 @@
 covdefaults==2.2.0
 coverage==6.3.2
-pytest==7.1.1
+pytest==7.1.2
 sh
