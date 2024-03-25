@@ -41,7 +41,7 @@ repos:
       - id: requirements-txt-fixer
       - id: trailing-whitespace
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: "v1.8.0"
+    rev: "v1.9.0"
     hooks:
       - id: mypy
         additional_dependencies: [tokenize-rt==3.2.0]
@@ -83,13 +83,13 @@ repos:
     hooks:
       - id: flake8
   - repo: https://github.com/PyCQA/bandit
-    rev: 1.7.7
+    rev: 1.7.8
     hooks:
       - id: bandit
         args:
           - "-x=tests"
   - repo: https://github.com/PyCQA/pylint
-    rev: v3.0.3
+    rev: v3.1.0
     hooks:
       - id: pylint
         additional_dependencies:
@@ -100,7 +100,7 @@ repos:
           - "--ignore-patterns=test_.*\\.py"
           - "--disable=fixme"
   - repo: https://github.com/jendrikseipp/vulture
-    rev: "v2.10"
+    rev: "v2.11"
     hooks:
       - id: vulture
   - repo: https://github.com/PyCQA/pydocstyle
@@ -125,11 +125,11 @@ repos:
     hooks:
       - id: tox-ini-fmt
   - repo: https://github.com/jackdewinter/pymarkdown
-    rev: v0.9.17
+    rev: v0.9.18
     hooks:
       - id: pymarkdown
   - repo: https://github.com/asottile/pyupgrade
-    rev: v3.15.1
+    rev: v3.15.2
     hooks:
       - id: pyupgrade
         args: [--py37-plus]
